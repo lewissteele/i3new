@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/lewissteele/i3new/issues"
   },
-  "homepage": "https://github.com/lewissteele/i3new#readme"
+  "homepage": "https://github.com/lewissteele/i3new#readme",
+  "devDependencies": {
+    "jest": "^26.6.3"
+  }
 }
