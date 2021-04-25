@@ -1,7 +1,5 @@
-const rewire = require('rewire')
 const { exec } = require('child_process')
-
-const i3new = rewire('./i3new')
+const i3new = require('./i3new')
 
 jest.mock('child_process')
 
@@ -13,7 +11,7 @@ test('it calls i3-msg -t get_workspaces and parses json', async () => {
       { stdout: '[{"focused":true,"num":1},{"focused":false,"num":2}]' }
     )
   })
-  expect(await i3new.__get__('getWorkspaces')()).toHaveLength(2)
+  expect(await i3new.getWorkspaces()).toHaveLength(2)
 })
 
 test('it finds the focused workspace', () => {
@@ -24,5 +22,14 @@ test('it finds the focused workspace', () => {
     { focused: false, num: 4 }
   ]
 
-  expect(i3new.__get__('getFocusedWorkspace')(workspaces)).toBe(3)
+  expect(i3new.getFocusedWorkspace(workspaces)).toBe(3)
+})
+
+test('it finds the closest workspace to focused with nothing in it', () => {
+  const workspaces = [
+    { focused: false, num: 1 },
+    { focused: true, num: 2 },
+    { focused: false, num: 4 }
+  ]
+  expect(i3new.getClosestAvailableWorkspace(workspaces, 2)).toBe(3)
 })
