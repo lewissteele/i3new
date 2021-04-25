@@ -33,3 +33,12 @@ test('it finds the closest workspace to focused with nothing in it', () => {
   ]
   expect(i3new.getClosestAvailableWorkspace(workspaces, 2)).toBe(3)
 })
+
+test('it calls i3-msg to move to new workspace', () => {
+  exec.mockImplementation((command, callback) => {
+    expect(command).toBe('i3-msg workspace 2')
+    callback()
+  })
+
+  i3new.moveTo(2)
+})

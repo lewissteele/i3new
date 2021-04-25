@@ -4,13 +4,16 @@ const exec = promisify(require('child_process').exec)
 module.exports = Object.assign(i3new, {
   getWorkspaces,
   getFocusedWorkspace,
-  getClosestAvailableWorkspace
+  getClosestAvailableWorkspace,
+  moveTo
 })
 
 async function i3new () {
   const workspaces = await getWorkspaces()
   const focused = getFocusedWorkspace(workspaces)
   const closest = getClosestAvailableWorkspace(workspaces, focused)
+
+  moveTo(closest)
 }
 
 async function getWorkspaces () {
@@ -33,4 +36,8 @@ function getClosestAvailableWorkspace (workspaces, focused) {
   )
 
   return closest
+}
+
+async function moveTo (workspace) {
+  await exec(`i3-msg workspace ${workspace}`)
 }
