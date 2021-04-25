@@ -25,5 +25,8 @@
     "env": [
       "jest"
     ]
+  },
+  "bin": {
+    "i3new": "cli.js"
   }
 }
