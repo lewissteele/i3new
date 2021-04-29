@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "lint": "standard",
-    "test": "jest"
+    "test": "standard && jest"
   },
   "repository": {
     "type": "git",
