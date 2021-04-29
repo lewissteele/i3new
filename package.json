@@ -33,6 +33,7 @@
     "i3",
     "i3wm",
     "manager",
-    "window"
+    "window",
+    "workspace"
   ]
 }
